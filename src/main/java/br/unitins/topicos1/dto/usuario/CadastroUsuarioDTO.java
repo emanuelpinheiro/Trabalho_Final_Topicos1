@@ -19,8 +19,6 @@ public record CadastroUsuarioDTO (
 
     @NotNull
     Integer idPerfil,
-
-    
     @Email
     String email,
 
