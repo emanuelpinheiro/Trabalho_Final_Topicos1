@@ -13,8 +13,6 @@ public class Endereco extends DefaultEntity {
     private String complemento;
     private String cep;
 
-  
-
     public String getLogradouro() {
         return logradouro;
     }
@@ -54,7 +52,4 @@ public class Endereco extends DefaultEntity {
     public void setCep(String cep) {
         this.cep = cep;
     }
-
-
-
 }
