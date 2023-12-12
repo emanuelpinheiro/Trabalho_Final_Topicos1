@@ -12,7 +12,9 @@ public record JogoDTO(
    
     int estoque,
     
-    Integer idGenero
+    Integer idGenero,
+
+    String nomeImagem
 
 ) {
 

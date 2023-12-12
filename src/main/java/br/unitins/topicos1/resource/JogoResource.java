@@ -10,6 +10,7 @@ import br.unitins.topicos1.dto.jogo.JogoDTO;
 import br.unitins.topicos1.dto.jogo.JogoResponseDTO;
 import br.unitins.topicos1.form.JogoImageForm;
 import br.unitins.topicos1.service.FileService;
+import br.unitins.topicos1.service.JogoFileService;
 import br.unitins.topicos1.service.JogoService;
 import br.unitins.topicos1.service.JwtService;
 import jakarta.annotation.security.RolesAllowed;
@@ -42,7 +43,7 @@ public class JogoResource {
     JogoService jogoService;
 
     @Inject
-    FileService jogoFileService;
+    JogoFileService jogoFileService;
 
     @Inject
     JwtService jwtService;
