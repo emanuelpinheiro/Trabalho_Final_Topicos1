@@ -1,32 +1,35 @@
 package br.unitins.topicos1.dto.pedido;
 
-import br.unitins.topicos1.dto.endereco.EnderecoResponseDTO;
-
-import br.unitins.topicos1.model.StatusPedido;
-import br.unitins.topicos1.model.Pedido;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+
+import br.unitins.topicos1.dto.endereco.EnderecoResponseDTO;
+import br.unitins.topicos1.dto.itempedido.ItemPedidoResponseDTO;
+import br.unitins.topicos1.dto.usuario.UsuarioResponseDTO;
+import br.unitins.topicos1.model.FormaPagamento;
+import br.unitins.topicos1.model.Pedido;
+import br.unitins.topicos1.model.StatusPedido;
 
 public record PedidoResponseDTO(
     Long id,
-    Long idUsuario,
-    Long idJogo,
-    List<EnderecoResponseDTO> listaEndereco,
-    LocalDate dataCompra,
-    // FormaPagamento formaPagamento,
-    StatusPedido statusPedido
-) {
+    LocalDateTime dataCompra,
+    UsuarioResponseDTO usuario,
+    EnderecoResponseDTO endereco,
+    FormaPagamento pagamento,
+    Double totalPedido,
+    List<ItemPedidoResponseDTO> itens,
+    StatusPedido statusPedio
+) { 
     public static PedidoResponseDTO valueOf(Pedido pedido){
         return new PedidoResponseDTO(
-            pedido.getId(),
-            pedido.getIdUsuario(),
-            pedido.getIdJogo(),
-            pedido.getListaEndereco()
-            .stream()
-            .map(t -> EnderecoResponseDTO.valueOf(t)).toList(),
-            pedido.getDataCompra(),
-            // pedido.getFormaPagamento(),
+            pedido.getId(), 
+            pedido.getdataCompra(),
+            UsuarioResponseDTO.valueOf(pedido.getUsuario()),
+            EnderecoResponseDTO.valueOf(pedido.getEndereco()),
+            pedido.getPagamento(),
+            pedido.getTotalPedido(),
+            ItemPedidoResponseDTO.valueOf(pedido.getItens()),
             pedido.getStatusPedido()
-        );
+            );
     }
 }

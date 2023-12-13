@@ -1,81 +1,94 @@
 package br.unitins.topicos1.model;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 public class Pedido extends DefaultEntity {
 
-    @Column(name = "codigo_boleto")
-    private String codigoBoleto;
+    private LocalDateTime dataCompra;
+    private Double totalPedido;
 
-    @Column(name = "data_vencimento_boleto")
-    private LocalDate dataVencimentoBoleto;
-    
-    @Column(name = "id_usuario", nullable = false)
-    private Long idUsuario;
-
-    @Column(name = "id_jogo", nullable = false)
-    private Long idJogo;
-    
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinTable(name = "pedido_endereco", joinColumns = @JoinColumn(name = "id_pedido"), inverseJoinColumns = @JoinColumn(name = "id_endereco"))
-    private List<Endereco> listaEndereco;
-
-    @Column(nullable = false)
-    private LocalDate dataCompra;
-
-    // @Enumerated(EnumType.STRING)
-    // @Column(nullable = false)
-    // private FormaPagamento formaPagamento;
-
-    @Enumerated(EnumType.STRING)
-    @Column(length = 20, nullable = false)
+   @Enumerated(EnumType.STRING)
     private StatusPedido statusPedido;
 
+    @Enumerated(EnumType.STRING)
+    private FormaPagamento pagamento;
+
+    @ManyToOne
+    @JoinColumn(name = "id_endereco")
+    private Endereco endereco;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
     
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "pedido")
+    private List<ItemPedido> itens;
 
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public Long getIdJogo() {
-        return idJogo;
-    }
-
-    public void setIdJogo(Long idJogoLong) {
-        this.idJogo = idJogo;
-    }
-
-    public LocalDate getDataCompra() {
+    public LocalDateTime getDataCompra() {
         return dataCompra;
     }
 
-    public void setDataCompra(LocalDate dataCompra) {
+    public void setDataCompra(LocalDateTime dataCompra) {
         this.dataCompra = dataCompra;
     }
 
-    // public FormaPagamento getFormaPagamento() {
-    //     return formaPagamento;
-    // }
+    public Endereco getEndereco() {
+        return endereco;
+    }
 
-    // public void setFormaPagamento(FormaPagamento formaPagamento) {
-    //     this.formaPagamento = formaPagamento;
-    // }
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public LocalDateTime getdataCompra() {
+        return dataCompra;
+    }
+
+    public void setdataCompra(LocalDateTime dataCompra) {
+        this.dataCompra = dataCompra;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemPedido> itens) {
+        this.itens = itens;
+    }
+
+    public Double getTotalPedido() {
+        return totalPedido;
+    }
+
+    public void setTotalPedido(Double totalPedido) {
+        this.totalPedido = totalPedido;
+    }
+
+    public FormaPagamento getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(FormaPagamento pagamento) {
+        this.pagamento = pagamento;
+    }
 
     public StatusPedido getStatusPedido() {
         return statusPedido;
@@ -83,30 +96,6 @@ public class Pedido extends DefaultEntity {
 
     public void setStatusPedido(StatusPedido statusPedido) {
         this.statusPedido = statusPedido;
-    }
-
-    public List<Endereco> getListaEndereco() {
-        return listaEndereco;
-    }
-
-    public void setListaEndereco(List<Endereco> listaEndereco) {
-        this.listaEndereco = listaEndereco;
-    }
-
-    public String getCodigoBoleto() {
-        return codigoBoleto;
-    }
-
-    public void setCodigoBoleto(String codigoBoleto) {
-        this.codigoBoleto = codigoBoleto;
-    }
-
-    public LocalDate getDataVencimentoBoleto() {
-        return dataVencimentoBoleto;
-    }
-
-    public void setDataVencimentoBoleto(LocalDate dataVencimentoBoleto) {
-        this.dataVencimentoBoleto = dataVencimentoBoleto;
     }
 
     

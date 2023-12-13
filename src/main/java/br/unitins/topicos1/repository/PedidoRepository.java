@@ -8,7 +8,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class PedidoRepository implements PanacheRepository<Pedido> {
-    public List<Pedido> findByPedido(String pedido) {
-        return find("UPPER(pedido) LIKE UPPER(?1) ", "%"+pedido+"%").list();
+    public List<Pedido> findAll(String login) {
+        return find("usuario.login = ?1", login).list();
     }
+    
 }

@@ -4,6 +4,7 @@ import br.unitins.topicos1.dto.pedido.PedidoDTO;
 import br.unitins.topicos1.dto.pedido.PedidoResponseDTO;
 
 import br.unitins.topicos1.service.PedidoService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -13,6 +14,9 @@ import jakarta.ws.rs.core.Response.Status;
 
 import java.util.List;
 
+import org.eclipse.microprofile.jwt.JsonWebToken;
+import org.jboss.logging.Logger;
+
 @Path("/pedidos")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -21,43 +25,39 @@ public class PedidoResource {
     @Inject
     PedidoService service;
 
+    @Inject
+    JsonWebToken jwt;
+
+    private static final Logger LOG = Logger.getLogger(PedidoResource.class);
+
     @POST
+    @Path("/fazendopedido")
+    @RolesAllowed({ "User", "Admin" })
     public Response insert(@Valid PedidoDTO dto) {
-        PedidoResponseDTO retorno = service.insert(dto);
+        LOG.info("Iniciando inserção de Pedido");
+        String login = jwt.getSubject();
+        LOG.infof("usuario logado %s", login);
+        PedidoResponseDTO retorno = service.insert(login,dto);
+        LOG.info("Finalizando o processo de pedido.");
         return Response.status(201).entity(retorno).build();
     }
 
-    @PUT
-    @Path("/{id}")
-    public Response update(PedidoDTO dto, @PathParam("id") Long id) {
-        try {
-            PedidoResponseDTO retorno = service.update(dto, id);
-            return Response.status(Status.OK).entity(retorno).build();
-        } catch (NotFoundException e) {
-            return Response.status(Status.NOT_FOUND).build();
-        }
-    }
 
-    @DELETE
-    @Path("/{id}")
-    public Response delete(@PathParam("id") Long id) {
-        try {
-            service.delete(id);
-            return Response.status(Status.NO_CONTENT).build();
-        } catch (NotFoundException e) {
-            return Response.status(Status.NOT_FOUND).build();
-        }
-    }
 
     @GET
+    @RolesAllowed({ "User", "Admin" })
     public Response findByAll() {
-        List<PedidoResponseDTO> pedidos = service.findByAll();
+        LOG.info("Iniciando busca de Pedidos");
+        String login = jwt.getSubject();
+        List<PedidoResponseDTO> pedidos = service.findByAll(login);
         return Response.ok(pedidos).build();
     }
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({ "User", "Admin" })
     public Response findById(@PathParam("id") Long id) {
+        LOG.infof("Iniciando busca do Pedido : %s", id);
         PedidoResponseDTO pedido = service.findById(id);
         if (pedido != null) {
             return Response.ok(pedido).build();

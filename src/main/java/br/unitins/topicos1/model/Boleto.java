@@ -1,12 +1,15 @@
 package br.unitins.topicos1.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Entity;
 
-public class Boleto extends MetodoDePagamento {
+@Entity
+public class Boleto extends DefaultEntity {
 
+    private Double valor;
     private String numeroBoleto;
+    private LocalDateTime dataEmissao;
     private LocalDateTime dataVencimento;
 
     public String getNumeroBoleto() {
@@ -25,4 +28,21 @@ public class Boleto extends MetodoDePagamento {
         this.dataVencimento = localDateTime;
     }
 
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    public LocalDateTime getDataEmissao() {
+        return dataEmissao;
+    }
+
+    public void setDataEmissao(LocalDateTime dataEmissao) {
+        this.dataEmissao = dataEmissao;
+    }
+
+    
 }

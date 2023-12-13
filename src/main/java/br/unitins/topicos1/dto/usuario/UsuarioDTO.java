@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public record UsuarioDTO (
     @NotBlank(message = "O campo nome não pode ser nulo.")
@@ -14,6 +15,7 @@ public record UsuarioDTO (
     @NotBlank(message = "O campo login não pode ser nulo.")
     String login,
     @NotBlank(message = "O campo senha não pode ser nulo.")
+    @Size(min = 3, max = 15)
     String senha,
     
     @Email

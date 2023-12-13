@@ -5,11 +5,13 @@ import br.unitins.topicos1.model.TipoChavePix;
 
 
 public record PixResponseDTO(
+    Double valor,
     String chavePix,
     TipoChavePix tipoChavePix
 ) {
         public static PixResponseDTO valueOf(Pix pix){
         return new PixResponseDTO(
+            pix.getValor(),
             pix.getChavePix(),
             pix.getTipoChavePix()
         );

@@ -181,6 +181,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    @Transactional
     public UsuarioResponseDTO updateTelefone(@Valid UpdateTelefoneDTO dto, String login) {
 
         Usuario usuario = repository.findByLogin(login);
@@ -208,6 +209,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         return UsuarioResponseDTO.valueOf(usuario);
     }
+
+
+    
 
     // -------------------------------------------- FIND's e afins
     // --------------------------------------------

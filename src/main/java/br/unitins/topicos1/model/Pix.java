@@ -1,14 +1,17 @@
 package br.unitins.topicos1.model;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
-public class Pix extends MetodoDePagamento {
 
+@Entity
+public class Pix  extends DefaultEntity{
+
+    private Double valor;
     private String chavePix;
 
-    @ManyToOne
-    @JoinColumn(name = "id_tipoChavePix")
+    @Enumerated(EnumType.STRING)
     private TipoChavePix tipoChavePix;
 
     public String getChavePix() {
@@ -27,4 +30,13 @@ public class Pix extends MetodoDePagamento {
         this.tipoChavePix = tipoChavePix;
     }
 
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    
 }

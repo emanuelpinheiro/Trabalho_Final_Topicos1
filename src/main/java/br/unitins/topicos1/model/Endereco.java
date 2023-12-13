@@ -9,10 +9,15 @@ public class Endereco extends DefaultEntity {
 
     private String logradouro;
     private String bairro;
-    private String numero;
+    private Integer numero;
     private String complemento;
     private String cep;
 
+    @ManyToOne
+    @JoinColumn(name = "id_cidade")
+    private Cidade idCidade;
+
+    
     public String getLogradouro() {
         return logradouro;
     }
@@ -29,11 +34,11 @@ public class Endereco extends DefaultEntity {
         this.bairro = bairro;
     }
 
-    public String getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 
@@ -52,4 +57,13 @@ public class Endereco extends DefaultEntity {
     public void setCep(String cep) {
         this.cep = cep;
     }
+
+    public Cidade getIdCidade() {
+        return idCidade;
+    }
+
+    public void setIdCidade(Cidade idCidade) {
+        this.idCidade = idCidade;
+    }
+
 }

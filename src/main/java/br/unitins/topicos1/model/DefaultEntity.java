@@ -4,7 +4,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.Version;
+
 
 @MappedSuperclass
 public class DefaultEntity {
@@ -13,8 +13,6 @@ public class DefaultEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Version
-    private int version;
 
     public Long getId() {
         return id;
@@ -24,12 +22,5 @@ public class DefaultEntity {
         this.id = id;
     }
 
-    public int getVersion() {
-        return version;
-    }
-
-    public void setVersion(int version) {
-        this.version = version;
-    }
 
 }

@@ -1,22 +1,26 @@
 package br.unitins.topicos1.dto.endereco;
 
-import br.unitins.topicos1.model.Endereco;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 public record EnderecoDTO(
-    @NotEmpty(message = "O campo nome não pode ser nulo.")
+    @NotBlank(message = "O cep não pode ser nulo.")
+    @Pattern(regexp = "(^\\d{5}-\\d{3}$)", message = "Preencha o cep de acordo com o formato xxxxx-xxx")
     String cep,
-    @NotEmpty(message = "O campo nome não pode ser nulo.")
+
+    @NotEmpty(message = "O campo logradoro não pode ser nulo.")
     String logradouro,
-    @NotEmpty(message = "O campo nome não pode ser nulo.")
-    String numero,
-    @NotEmpty(message = "O campo nome não pode ser nulo.")
+    @NotNull(message = "O campo numero não pode ser nulo")
+    Integer numero,
+    @NotEmpty(message = "O campo complemento não pode ser nulo.")
     String complemento,
-    @NotEmpty(message = "O campo nome não pode ser nulo.")
-    String bairro
+    @NotEmpty(message = "O campo bairro não pode ser nulo.")
+    String bairro,
     
+    @NotNull(message = "O campo cidade não pode ser nulo")
+    Long idCidade
 ) {
 
     

@@ -1,6 +1,6 @@
 package br.unitins.topicos1.model;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum TipoChavePix {
     

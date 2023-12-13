@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public enum StatusPedido {
 
     PROCESSANDO(1, "Processando"),
-    PAGA(2, "Paga"),
+    PAGO(2, "Pago"),
     ENVIADA(3,"Enviada"),
     CANCELADA(4,"Cancelada"),
     FINALIZADA(5,"Finalizada");

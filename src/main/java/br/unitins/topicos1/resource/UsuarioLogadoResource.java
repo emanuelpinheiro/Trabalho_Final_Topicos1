@@ -10,6 +10,7 @@ import br.unitins.topicos1.service.FileService;
 import br.unitins.topicos1.service.JogoService;
 import br.unitins.topicos1.service.UsuarioService;
 import br.unitins.topicos1.application.Error;
+import br.unitins.topicos1.dto.endereco.EnderecoDTO;
 import br.unitins.topicos1.dto.jogo.JogoResponseDTO;
 import br.unitins.topicos1.dto.usuario.CadastroUsuarioDTO;
 import br.unitins.topicos1.dto.usuario.CadastroUsuarioResponseDTO;
@@ -142,6 +143,5 @@ public class UsuarioLogadoResource {
     }
 
     // --------------------------------- 
-
 
 }

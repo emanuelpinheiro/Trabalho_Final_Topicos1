@@ -39,5 +39,5 @@ public interface UsuarioService {
     public UsuarioResponseDTO updateTelefone(@Valid UpdateTelefoneDTO dto, String login);
 
     public CadastroUsuarioResponseDTO cadastrarUsuario (@Valid CadastroUsuarioDTO dto);
-
+    
 }

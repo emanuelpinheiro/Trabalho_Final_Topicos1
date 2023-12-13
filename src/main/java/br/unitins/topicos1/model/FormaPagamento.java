@@ -3,7 +3,7 @@ package br.unitins.topicos1.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public enum EscolhaMetodoPagamento {
+public enum FormaPagamento {
     
     PIX(1,"Pix"),
     BOLETO(2, "Boleto");
@@ -11,7 +11,7 @@ public enum EscolhaMetodoPagamento {
     private final Integer id;
     private final String label;
     
-    private EscolhaMetodoPagamento(Integer id, String label) {
+    private FormaPagamento(Integer id, String label) {
         this.id = id;
         this.label = label;
     }
@@ -24,10 +24,10 @@ public enum EscolhaMetodoPagamento {
         return label;
     }
 
-    public static EscolhaMetodoPagamento ValueOf(Integer id) throws IllegalArgumentException {
+    public static FormaPagamento ValueOf(Integer id) throws IllegalArgumentException {
         if (id ==null)
             return null;
-        for (EscolhaMetodoPagamento escolha :EscolhaMetodoPagamento.values()) {
+        for (FormaPagamento escolha :FormaPagamento.values()) {
             if (escolha.getId().equals(id))
                 return escolha;
         }
