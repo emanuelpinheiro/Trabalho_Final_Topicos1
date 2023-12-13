@@ -108,25 +108,17 @@ public class JogoResource {
 
     
     @PATCH
-    @Path("/upload/imagem/jogo")
+    @Path("/upload/imagem/{id}")
     @RolesAllowed({ "Admin" })
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response salvarImagem(@MultipartForm JogoImageForm form, Long id){
+    public Response salvarImagem(@MultipartForm JogoImageForm form, @PathParam("id") Long id) throws IOException {
         LOG.info("Iniciando a inserção de imagem");
         String nomeImagem;
-        try {
-            nomeImagem = jogoFileService.salvar(form.getNomeImagem(), form.getImagem());
-        } catch (IOException e) {
-            e.printStackTrace();
-            Error error = new Error("409", e.getMessage());
-            return Response.status(Status.CONFLICT).entity(error).build();
-        }
-
+        nomeImagem = jogoFileService.salvar(form.getNomeImagem(), form.getImagem());
         JogoResponseDTO jogoDTO = jogoService.findById(id);
         jogoDTO = jogoService.updateNomeImagem(jogoDTO.id(), nomeImagem);
 
         return Response.ok(jogoDTO).build();
-
     }
 
     @GET

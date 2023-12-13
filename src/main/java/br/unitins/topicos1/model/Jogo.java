@@ -62,7 +62,7 @@ public class Jogo extends DefaultEntity {
         return nomeImagem;
     }
 
-    public void setNomeImage(String nomeImagem) {
+    public void setNomeImagem(String nomeImagem) {
         this.nomeImagem = nomeImagem;
     }
 

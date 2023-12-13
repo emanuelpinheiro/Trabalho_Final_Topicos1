@@ -92,7 +92,7 @@ public class JogoServiceImpl implements JogoService {
     @Transactional
     public JogoResponseDTO updateNomeImagem(Long id, String nomeImagem) {
         Jogo jogo = repository.findById(id);
-        jogo.setNomeImage(nomeImagem);
+        jogo.setNomeImagem(nomeImagem);
         return JogoResponseDTO.valueOf(jogo);
     }
 
