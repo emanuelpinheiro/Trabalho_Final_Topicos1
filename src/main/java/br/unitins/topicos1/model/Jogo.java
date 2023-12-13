@@ -12,7 +12,7 @@ public class Jogo extends DefaultEntity {
     private Double preco;
     private int estoque;
 
-    private String nomeImage;
+    private String nomeImagem;
 
     
     @Enumerated(EnumType.STRING)
@@ -58,12 +58,12 @@ public class Jogo extends DefaultEntity {
         this.estoque = estoque;
     }
 
-    public String getNomeImage() {
-        return nomeImage;
+    public String getNomeImagem() {
+        return nomeImagem;
     }
 
-    public void setNomeImage(String nomeImage) {
-        this.nomeImage = nomeImage;
+    public void setNomeImage(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
     }
 
     

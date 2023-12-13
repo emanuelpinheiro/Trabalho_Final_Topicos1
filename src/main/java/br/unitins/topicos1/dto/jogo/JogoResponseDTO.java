@@ -9,7 +9,8 @@ public record JogoResponseDTO(
         String descricao,
         Double preco,
         int estoque,
-        Genero genero) {
+        Genero genero,
+        String nomeImagem) {
     public static JogoResponseDTO valueOf(Jogo jogo) {
 
         return new JogoResponseDTO(
@@ -18,7 +19,8 @@ public record JogoResponseDTO(
                 jogo.getDescricao(),
                 jogo.getPreco(),
                 jogo.getEstoque(),
-                jogo.getGenero());
+                jogo.getGenero(), 
+                jogo.getNomeImagem());
     }
 
 }
