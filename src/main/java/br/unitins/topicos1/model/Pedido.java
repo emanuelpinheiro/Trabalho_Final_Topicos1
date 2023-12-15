@@ -1,5 +1,6 @@
 package br.unitins.topicos1.model;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -14,14 +15,16 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Pedido extends DefaultEntity {
 
-    private LocalDateTime dataCompra;
+    private LocalDateTime dataCompra; 
     private Double totalPedido;
 
-   @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private StatusPedido statusPedido;
 
     @Enumerated(EnumType.STRING)
-    private FormaPagamento pagamento;
+    private FormaPagamento pagamento; 
+
+    private LocalDateTime vencimento;
 
     @ManyToOne
     @JoinColumn(name = "id_endereco")
@@ -30,8 +33,8 @@ public class Pedido extends DefaultEntity {
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
-    
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "pedido")
+
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<ItemPedido> itens;
 
     public LocalDateTime getDataCompra() {
@@ -98,6 +101,12 @@ public class Pedido extends DefaultEntity {
         this.statusPedido = statusPedido;
     }
 
-    
-    
+    public LocalDateTime getVencimento() {
+        return vencimento;
+    }
+
+    public void setVencimento(LocalDateTime vencimento) {
+        this.vencimento = vencimento;
+    }
+
 }

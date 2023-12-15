@@ -3,6 +3,8 @@ package br.unitins.topicos1.model;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Boleto extends DefaultEntity {
@@ -11,6 +13,12 @@ public class Boleto extends DefaultEntity {
     private String numeroBoleto;
     private LocalDateTime dataEmissao;
     private LocalDateTime dataVencimento;
+
+    
+    
+    @ManyToOne
+    @JoinColumn(name = "id_pedido")
+    private Pedido idPedido;
 
     public String getNumeroBoleto() {
         return numeroBoleto;
@@ -44,5 +52,12 @@ public class Boleto extends DefaultEntity {
         this.dataEmissao = dataEmissao;
     }
 
-    
+    public Pedido getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(Pedido idPedido) {
+        this.idPedido = idPedido;
+    }
+
 }

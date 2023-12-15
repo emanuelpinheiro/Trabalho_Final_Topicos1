@@ -18,7 +18,8 @@ public record PedidoResponseDTO(
     FormaPagamento pagamento,
     Double totalPedido,
     List<ItemPedidoResponseDTO> itens,
-    StatusPedido statusPedio
+    StatusPedido statusPedio,
+    LocalDateTime vencimento
 ) { 
     public static PedidoResponseDTO valueOf(Pedido pedido){
         return new PedidoResponseDTO(
@@ -29,7 +30,8 @@ public record PedidoResponseDTO(
             pedido.getPagamento(),
             pedido.getTotalPedido(),
             ItemPedidoResponseDTO.valueOf(pedido.getItens()),
-            pedido.getStatusPedido()
+            pedido.getStatusPedido(),
+            pedido.getVencimento()
             );
     }
 }

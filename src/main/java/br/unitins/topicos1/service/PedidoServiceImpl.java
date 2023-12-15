@@ -44,15 +44,13 @@ public class PedidoServiceImpl implements PedidoService {
         novoPedido.setUsuario(usuario);
         novoPedido.setDataCompra(LocalDateTime.now());
 
-        // Front-end resolve facil facil a excessão desse possivel erro, não deixando o usuario escolher além do seus endereços listados
+        // Front-end resolve facil facil a excessão desse possivel erro, não deixando o
+        // usuario escolher além do seus endereços listados
         for (Endereco end : usuario.getListaEndereco()) {
             if (dto.endereco() == end.getId()) {
                 novoPedido.setEndereco(end);
             }
-        } 
-
-
-
+        }
 
         novoPedido.setPagamento(FormaPagamento.ValueOf(dto.pagamento()));
 
@@ -71,7 +69,7 @@ public class PedidoServiceImpl implements PedidoService {
             ItemPedido item = new ItemPedido();
             item.setPreco(itemDto.preco());
             item.setQuantidade(itemDto.quantidade());
-            item.setPedido(novoPedido);
+
             Jogo jogo = jogoRepository.findById(itemDto.idProduto());
             item.setJogo(jogo);
 
@@ -84,6 +82,12 @@ public class PedidoServiceImpl implements PedidoService {
         // salvando no banco
         pedidoRepository.persist(novoPedido);
 
+        if (dto.pagamento() == 1) {
+            novoPedido.setVencimento(novoPedido.getDataCompra().plusMinutes(1));
+        } else if (dto.pagamento() == 2) {
+            novoPedido.setVencimento(novoPedido.getDataCompra().plusDays(2));
+        }
+
         return PedidoResponseDTO.valueOf(novoPedido);
 
     }
@@ -93,16 +97,11 @@ public class PedidoServiceImpl implements PedidoService {
         return PedidoResponseDTO.valueOf(pedidoRepository.findById(id));
     }
 
-    // @Override
-    // public List<PedidoResponseDTO> findByAll() {
-    // return pedidoRepository.listAll().stream()
-    // .map(e -> PedidoResponseDTO.valueOf(e)).toList();
-    // }
-
     @Override
     public List<PedidoResponseDTO> findByAll(String login) {
         return pedidoRepository.listAll().stream()
                 .map(e -> PedidoResponseDTO.valueOf(e)).toList();
     }
+
 
 }

@@ -12,6 +12,7 @@ public class Jogo extends DefaultEntity {
     private Double preco;
     private int estoque;
 
+    
     private String nomeImagem;
 
     

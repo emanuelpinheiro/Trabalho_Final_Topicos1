@@ -31,7 +31,7 @@ public class PedidoResource {
     private static final Logger LOG = Logger.getLogger(PedidoResource.class);
 
     @POST
-    @Path("/fazendopedido")
+    @Path("/fazer-pedido")
     @RolesAllowed({ "User", "Admin" })
     public Response insert(@Valid PedidoDTO dto) {
         LOG.info("Iniciando inserção de Pedido");
@@ -45,17 +45,20 @@ public class PedidoResource {
 
 
     @GET
+    @Path("/buscar/meuspedidos")
     @RolesAllowed({ "User", "Admin" })
     public Response findByAll() {
         LOG.info("Iniciando busca de Pedidos");
+
         String login = jwt.getSubject();
+        
         List<PedidoResponseDTO> pedidos = service.findByAll(login);
         return Response.ok(pedidos).build();
     }
 
     @GET
-    @Path("/{id}")
-    @RolesAllowed({ "User", "Admin" })
+    @Path("buscar/pedido/{id}")
+    @RolesAllowed({"Admin" })
     public Response findById(@PathParam("id") Long id) {
         LOG.infof("Iniciando busca do Pedido : %s", id);
         PedidoResponseDTO pedido = service.findById(id);

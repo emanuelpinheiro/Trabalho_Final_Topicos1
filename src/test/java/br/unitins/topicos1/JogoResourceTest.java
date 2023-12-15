@@ -27,7 +27,7 @@ public class JogoResourceTest {
 
     @Test
     public void testInsert() {
-        JogoDTO dto = new JogoDTO("Super Mario", "Um jogo de plataforma", 59.99, 4, 1);
+        JogoDTO dto = new JogoDTO("Super Mario", "Um jogo de plataforma", 59.99, 4, 1, "super mario");
         given()
             .contentType(ContentType.JSON)
             .body(dto)
@@ -41,18 +41,19 @@ public class JogoResourceTest {
                 "descricao", is("Um jogo de plataforma"),
                 "preco", is(59.99f),
                 "estoque", is(4),
-                "idGenero", is(1)
+                "idGenero", is(1),
+                "nomeImagem", is("super mario")
             );
     }
 
     @Test
     public void testUpdate() {
-        JogoDTO dto = new JogoDTO("Super Mario", "Um jogo de plataforma", 59.99, 4, 1);
+        JogoDTO dto = new JogoDTO("Super Mario", "Um jogo de plataforma", 59.99, 4, 1, "super mario");
 
         JogoResponseDTO response = service.insert(dto);
         Long id = response.id();
 
-        dto = new JogoDTO("Super Mario", "Um jogo de plataforma", 69.99, 4, 1);
+        dto = new JogoDTO("Super Mario", "Um jogo de plataforma", 69.99, 4, 1, "super mario");
 
         given()
             .contentType(ContentType.JSON)
@@ -67,13 +68,14 @@ public class JogoResourceTest {
                 "descricao", is("Descrição Atualizada"),
                 "preco", is(69.99f),
                 "estoque", is(4),
-                "idGenero", is(1)
+                "idGenero", is(1),
+                "nomeImagem", is("super mario")
             );
     }
 
     @Test
     public void testDelete() {
-        JogoDTO dto = new JogoDTO("Super Mario", "Um jogo de plataforma", 59.99, 4, 1);
+        JogoDTO dto = new JogoDTO("Super Mario", "Um jogo de plataforma", 59.99, 4, 1, "super mario");
 
         JogoResponseDTO response = service.insert(dto);
         Long id = response.id();
@@ -95,7 +97,7 @@ public class JogoResourceTest {
 
     @Test
     public void testFindById() {
-        JogoDTO dto = new JogoDTO("Super Mario", "Um jogo de plataforma", 59.99, 4, 1);
+        JogoDTO dto = new JogoDTO("Super Mario", "Um jogo de plataforma", 59.99, 4, 1, "super mario");
 
         JogoResponseDTO response = service.insert(dto);
         Long id = response.id();
@@ -111,13 +113,14 @@ public class JogoResourceTest {
                 "descricao", is("Um jogo de plataforma"),
                 "preco", is(59.99f),
                 "estoque", is(4),
-                "idGenero", is(1)
+                "idGenero", is(1),
+                "nomeImagem", is("super mario")
             );
     }
 
     @Test
     public void testFindByNome() {
-        JogoDTO dto = new JogoDTO("Super Mario", "Um jogo de plataforma", 59.99, 4, 1);
+        JogoDTO dto = new JogoDTO("Super Mario", "Um jogo de plataforma", 59.99, 4, 1, "super mario");
 
         JogoResponseDTO response = service.insert(dto);
         Long id = response.id();
@@ -133,7 +136,8 @@ public class JogoResourceTest {
                 "descricao", is("Um jogo de plataforma"),
                 "preco", is(59.99f),
                 "estoque", is(4),
-                "idGenero", is(1)
+                "idGenero", is(1),
+                "nomeImagem", is("super mario")
             );
     }
 }

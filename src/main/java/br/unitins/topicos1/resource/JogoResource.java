@@ -9,7 +9,6 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import br.unitins.topicos1.dto.jogo.JogoDTO;
 import br.unitins.topicos1.dto.jogo.JogoResponseDTO;
 import br.unitins.topicos1.form.JogoImageForm;
-import br.unitins.topicos1.service.FileService;
 import br.unitins.topicos1.service.JogoFileService;
 import br.unitins.topicos1.service.JogoService;
 import br.unitins.topicos1.service.JwtService;
@@ -92,7 +91,7 @@ public class JogoResource {
 
         jogoService.findById(id);
 
-;
+        ;
         return Response.ok().build();
     }
 
@@ -106,38 +105,40 @@ public class JogoResource {
         return Response.ok().build();
     }
 
-    
     @PATCH
-    @Path("/upload/imagem/jogo")
+    @Path("/upload/imagem/jogo/{id}")
     @RolesAllowed({ "Admin" })
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response salvarImagem(@MultipartForm JogoImageForm form, Long id){
-        LOG.info("Iniciando a inserção de imagem");
-        String nomeImagem;
+    public Response salvarImagem(@MultipartForm JogoImageForm form, @PathParam("id") Long id) {
         try {
-            nomeImagem = jogoFileService.salvar(form.getNomeImagem(), form.getImagem());
+            LOG.info("Iniciando a inserção de imagem");
+            String nomeImagem = jogoFileService.salvar(form.getNomeImagem(), form.getImagem());
+            LOG.info("Atualizando a nova imagem.");
+
+            JogoResponseDTO oculosDTO = jogoService.updateNomeImagem(id, nomeImagem);
+
+            LOG.info("Retornando a imagem.");
+            return Response.ok(oculosDTO).build();
+
         } catch (IOException e) {
             e.printStackTrace();
-            Error error = new Error("409", e.getMessage());
-            return Response.status(Status.CONFLICT).entity(error).build();
+
+            LOG.info("Retornando um erro do servidor.");
+            Error error = new Error("500", "Erro ao processar a imagem.");
+            return Response.status(Status.INTERNAL_SERVER_ERROR).entity(error).build();
         }
-
-        JogoResponseDTO jogoDTO = jogoService.findById(id);
-        jogoDTO = jogoService.updateNomeImagem(jogoDTO.id(), nomeImagem);
-
-        return Response.ok(jogoDTO).build();
 
     }
 
     @GET
     @Path("/download/imagem/jogo/{nomeImagem}")
-    @RolesAllowed({"Admin" })
+    @RolesAllowed({ "Admin" })
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     public Response download(@PathParam("nomeImagem") String nomeImagem) {
         LOG.info("Iniciando a inserção download imagem");
         ResponseBuilder response = Response.ok(jogoFileService.obter(nomeImagem));
-        response.header("Content-Disposition", "attachment;filename="+nomeImagem);
+        response.header("Content-Disposition", "attachment;filename=" + nomeImagem);
         return response.build();
     }
-    
+
 }

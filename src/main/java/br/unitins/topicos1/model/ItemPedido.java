@@ -14,10 +14,6 @@ public class ItemPedido extends DefaultEntity {
     @JoinColumn(name = "id_jogo")
     private Jogo jogo;
 
-    @ManyToOne
-    @JoinColumn(name = "id_pedido")
-    private Pedido pedido;
-
     public Integer getQuantidade() {
         return quantidade;
     }
@@ -42,11 +38,4 @@ public class ItemPedido extends DefaultEntity {
         this.jogo = jogo;
     }
     
-    public Pedido getPedido() {
-        return pedido;
-    }
-
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
-    }
 }

@@ -3,6 +3,8 @@ package br.unitins.topicos1.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 
 @Entity
@@ -10,6 +12,10 @@ public class Pix  extends DefaultEntity{
 
     private Double valor;
     private String chavePix;
+
+    @ManyToOne
+    @JoinColumn(name = "id_pedido")
+    private Pedido idPedido;
 
     @Enumerated(EnumType.STRING)
     private TipoChavePix tipoChavePix;
@@ -38,5 +44,14 @@ public class Pix  extends DefaultEntity{
         this.valor = valor;
     }
 
+    public Pedido getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(Pedido idPedido) {
+        this.idPedido = idPedido;
+    }
+
+    
     
 }
