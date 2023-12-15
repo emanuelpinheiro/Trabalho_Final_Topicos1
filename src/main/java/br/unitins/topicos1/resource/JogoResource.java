@@ -59,9 +59,15 @@ public class JogoResource {
     @Path("/{id}")
     @RolesAllowed({ "Admin" })
     public Response update(@Valid JogoDTO dto, @PathParam("id") Long id) {
-        LOG.infof("Iniciando  o update do jogo %s", id);
-        jogoService.update(dto, id);
+        LOG.infof("Iniciando o update do jogo %s", id);
 
+        JogoResponseDTO jogoDTO = jogoService.findById(id);
+        if (jogoDTO == null) {
+            return Response.status(Status.NOT_FOUND).entity("Jogo não encontrado").build();
+        }
+
+        jogoService.update(dto, id);
+    
         return Response.noContent().build();
     }
 
