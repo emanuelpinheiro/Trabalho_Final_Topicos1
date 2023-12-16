@@ -127,7 +127,6 @@ public class JogoResource {
             Error error = new Error("500", "Erro ao processar a imagem.");
             return Response.status(Status.INTERNAL_SERVER_ERROR).entity(error).build();
         }
-
     }
 
     @GET
