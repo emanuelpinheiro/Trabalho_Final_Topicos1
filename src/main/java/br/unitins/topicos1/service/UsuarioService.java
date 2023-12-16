@@ -40,4 +40,5 @@ public interface UsuarioService {
 
     public CadastroUsuarioResponseDTO cadastrarUsuario (@Valid CadastroUsuarioDTO dto);
     
+     public CadastroUsuarioResponseDTO findByLoginAndSenhaPerfil(String login, String senha);
 }

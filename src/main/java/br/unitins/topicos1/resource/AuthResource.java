@@ -2,6 +2,7 @@ package br.unitins.topicos1.resource;
 
 import org.jboss.logging.Logger;
 
+import br.unitins.topicos1.dto.usuario.CadastroUsuarioResponseDTO;
 import br.unitins.topicos1.dto.usuario.LoginDTO;
 import br.unitins.topicos1.dto.usuario.UsuarioResponseDTO;
 import br.unitins.topicos1.service.HashService;
@@ -44,7 +45,7 @@ public class AuthResource {
 
         LOG.debug(hashSenha);
 
-        UsuarioResponseDTO result = service.findByLoginAndSenha(dto.login(), hashSenha);
+        CadastroUsuarioResponseDTO result = service.findByLoginAndSenhaPerfil(dto.login(), hashSenha);
 
         if (result != null)
             LOG.info("Login e senha corretos.");

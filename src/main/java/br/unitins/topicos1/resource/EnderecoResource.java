@@ -68,11 +68,12 @@ public class EnderecoResource {
 
     @PUT
     @Transactional
-    @Path("/atualiza-endereco/{id}/{idEndereco}")
-    @RolesAllowed({"Admin"})
-    public Response update(EnderecoDTO dto, @PathParam("id") Long id,  @PathParam("idEndereco") Long idEndereco){
+    @Path("/atualiza-endereco/{idEndereco}")
+    @RolesAllowed({"User","Admin"})
+    public Response update(EnderecoDTO dto,  @PathParam("idEndereco") Long idEndereco){
         LOG.info("Atualizando o endereço.");
-        service.update(idEndereco, id, dto);
+         String login = jwt.getSubject();
+        service.update(login, idEndereco, dto);
 
         LOG.info("Finalizando a atualização do endereço.");
         return Response.noContent().build();
@@ -80,12 +81,14 @@ public class EnderecoResource {
 
     @DELETE
     @Transactional
-    @Path("/deleta-endereco/{id}/{idEndereco}")
-    @RolesAllowed({"Admin"})
-    public Response delete(@PathParam("id") Long id, @PathParam("idEndereco") Long idEndereco){
+    @Path("/deleta-endereco/{idEndereco}")
+    @RolesAllowed({"User","Admin"})
+    public Response delete(@PathParam("idEndereco") Long idEndereco){
         LOG.infof("Deletando endereço %s", idEndereco);
-        service.delete(id, idEndereco);
+       
+        String login = jwt.getSubject();
 
+        service.delete(login,idEndereco);
         LOG.info("Endereço deletado.");
         return Response.noContent().build();
     }

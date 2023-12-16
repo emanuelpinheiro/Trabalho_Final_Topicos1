@@ -2,6 +2,7 @@ package br.unitins.topicos1.service;
 
 import java.util.List;
 
+import br.unitins.topicos1.dto.endereco.EnderecoResponseDTO;
 import br.unitins.topicos1.dto.jogo.JogoDTO;
 import br.unitins.topicos1.dto.jogo.JogoResponseDTO;
 import br.unitins.topicos1.dto.usuario.UsuarioResponseDTO;
@@ -82,11 +83,13 @@ public class JogoServiceImpl implements JogoService {
 
     @Override
     public List<JogoResponseDTO> findByAll() {
-        return repository.findAll()
+        return repository.listAll()
                 .stream()
                 .map(e -> JogoResponseDTO.valueOf(e))
                 .toList();
-    }
+    }   
+
+
 
     @Override
     @Transactional

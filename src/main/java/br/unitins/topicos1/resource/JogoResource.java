@@ -9,6 +9,7 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import br.unitins.topicos1.dto.jogo.JogoDTO;
 import br.unitins.topicos1.dto.jogo.JogoResponseDTO;
 import br.unitins.topicos1.form.JogoImageForm;
+import br.unitins.topicos1.model.Jogo;
 import br.unitins.topicos1.service.JogoFileService;
 import br.unitins.topicos1.service.JogoService;
 import br.unitins.topicos1.service.JwtService;
@@ -84,9 +85,8 @@ public class JogoResource {
     @GET
     public Response findAll() {
         LOG.info("Iniciando  a busca por todos os jogos");
-        jogoService.findByAll();
-
-        return Response.ok().build();
+       
+        return Response.ok(jogoService.findByAll()).build();
     }
 
     @GET
@@ -95,10 +95,9 @@ public class JogoResource {
     public Response findById(@PathParam("id") Long id) {
         LOG.infof("Iniciando  a busca pelo jogo %s", id);
 
-        jogoService.findById(id);
+        JogoResponseDTO jogo =jogoService.findById(id);
 
-        ;
-        return Response.ok().build();
+        return Response.ok(jogo).build();
     }
 
     @GET
@@ -106,9 +105,7 @@ public class JogoResource {
     public Response findByNome(@PathParam("nome") String nome) {
         LOG.infof("Iniciando  a busca pelo jogo %s", nome);
 
-        jogoService.findByNome(nome);
-
-        return Response.ok().build();
+        return Response.ok(jogoService.findByNome(nome)).build();
     }
 
     @PATCH

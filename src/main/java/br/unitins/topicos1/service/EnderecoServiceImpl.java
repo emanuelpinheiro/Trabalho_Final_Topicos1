@@ -57,8 +57,8 @@ public class EnderecoServiceImpl implements EnderecoService {
 
     @Override
     @Transactional
-    public EnderecoResponseDTO update(Long idUsuario, Long idEndereco, @Valid EnderecoDTO dto) {
-        Usuario usuario = repositoryUser.findById(idUsuario);
+    public EnderecoResponseDTO update( String login, Long idEndereco, @Valid EnderecoDTO dto) {
+        Usuario usuario = repositoryUser.findByLogin(login);
         Endereco endereco = new Endereco();
 
         for (Endereco end : usuario.getListaEndereco()) {
@@ -79,8 +79,8 @@ public class EnderecoServiceImpl implements EnderecoService {
     }
 
     @Override
-    public void delete(Long idUsuario, Long idEndereco) {
-        Usuario usuario = repositoryUser.findById(idUsuario);
+    public void delete(String login, Long idEndereco) {
+        Usuario usuario = repositoryUser.findByLogin(login);
         Endereco endereco = new Endereco();
 
         for (Endereco end : usuario.getListaEndereco()){

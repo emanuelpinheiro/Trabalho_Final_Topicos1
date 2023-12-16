@@ -32,17 +32,17 @@ public class PagamentoServiceImpl implements PagamentoService {
 
         if (pedido.getStatusPedido().equals(StatusPedido.PROCESSANDO)) {
             if (!data) {
-
                 pedido.setStatusPedido(StatusPedido.PAGO);
             } else {
                 pedido.setStatusPedido(StatusPedido.CANCELADA);
-                throw new ValidationException("Pagamento",
-                        "O pagamento não pode ser efetuado após a data de vencimento");
             }
-        }else{
+        }
+        else{
             throw new ValidationException("Pagamento",
                         "O pagamento já foi efetuado");
         }
+
+
         return PedidoResponseDTO.valueOf(pedido);
 
     }
